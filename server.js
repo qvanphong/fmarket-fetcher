@@ -46,12 +46,41 @@ const fetchAndUpdateData = async () => {
 // Schedule the background task to run every hour
 cron.schedule("0 * * * *", fetchAndUpdateData); // Runs at the start of every hour
 
-// API endpoint to serve the local JSON file
+// API endpoint to serve the full JSON data
 app.get("/fmarketMutualFund", (req, res) => {
   if (fs.existsSync(DATA_FILE)) {
     res.sendFile(DATA_FILE);
   } else {
     res.status(404).json({ error: "Data not available" });
+  }
+});
+
+// API endpoint to fetch a specific mutual fund by code
+app.get("/fmarketMutualFund/:code", (req, res) => {
+  const code = req.params.code.toUpperCase(); // Ensure case-insensitive search
+
+  if (!fs.existsSync(DATA_FILE)) {
+    return res.status(404).json({ error: "Data not available" });
+  }
+
+  try {
+    const rawData = fs.readFileSync(DATA_FILE, "utf-8");
+    const jsonData = JSON.parse(rawData);
+
+    if (!jsonData.data || !jsonData.data.rows) {
+      return res.status(500).json({ error: "Invalid data format" });
+    }
+
+    const fund = jsonData.data.rows.find((item) => item.code === code);
+
+    if (fund) {
+      res.json(fund);
+    } else {
+      res.status(404).json({ error: `No mutual fund found with code: ${code}` });
+    }
+  } catch (error) {
+    console.error("Error reading JSON file:", error.message);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 
