@@ -1,21 +1,20 @@
-# Use an official Node.js runtime as a parent image
+# Use official Node.js runtime
 FROM node:18
 
-# Set the working directory inside the container
+# Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json to install dependencies
+# Copy dependencies first
 COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy the rest of the application
+# Copy source code
 COPY . .
 
-# Expose the port the server will run on
+# Expose API port
 EXPOSE 3000
 
-# Command to run the server
-CMD ["node", "server.js"]
-
+# Start the application
+CMD ["node", "src/server.js"]

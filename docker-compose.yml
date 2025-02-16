@@ -7,6 +7,4 @@ services:
     restart: always
     ports:
       - "3000:3000"
-    volumes:
-      - ./fmarket_data.json:/app/fmarket_data.json
 
