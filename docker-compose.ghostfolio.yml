@@ -79,7 +79,7 @@ services:
   
   fmarket-fetcher:
     build: /home/jellyfin/fmarket-fetcher
-    container_name: fmarket-mutualfund
+    container_name: fmarket-price-feed
     restart: always
     ports:
       - "3033:3000"
