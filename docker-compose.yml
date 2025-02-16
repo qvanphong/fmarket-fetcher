@@ -3,7 +3,7 @@ version: '3.8'
 services:
   fmarket-server:
     build: .
-    container_name: fmarket-mutualfund
+    container_name: fmarket-price-feed
     restart: always
     ports:
       - "3000:3000"

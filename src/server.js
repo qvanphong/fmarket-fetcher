@@ -3,7 +3,7 @@ const cron = require("node-cron");
 const { PORT } = require("./config");
 const { ensureDataFileExists } = require("./services/dataService");
 const { fetchAndUpdateData } = require("./services/fetchService");
-const fundsRouter = require("./routes/funds");
+const mutualFundsRouter = require("./routes/funds/mutualFund");
 
 const app = express();
 
@@ -17,7 +17,7 @@ app.use((req, res, next) => {
 ensureDataFileExists();
 
 // Routes
-app.use("/fmarketMutualFund", fundsRouter);
+app.use("/fmarketMutualFund", mutualFundsRouter);
 
 // Schedule fetch every hour
 cron.schedule("0 * * * *", fetchAndUpdateData); // Runs every hour
