@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  fmarket-server:
+    build: .
+    container_name: fmarket-mutualfund
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./fmarket_data.json:/app/fmarket_data.json
+
