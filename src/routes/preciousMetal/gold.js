@@ -4,7 +4,7 @@ const { readData } = require("../../services/dataService");
 const router = express.Router();
 
 // Get fund by code
-router.get("/gold/:code", (req, res) => {
+router.get("/:code", (req, res) => {
   const code = req.params.code.toUpperCase();
   const data = readData('gold');
 
