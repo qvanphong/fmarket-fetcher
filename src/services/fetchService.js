@@ -132,8 +132,8 @@ const fetchSilverPqPrice = async () => {
 
             products.push({
                 name: productName,
-                sellPrice: $(columns[2]).text().trim().replace(/[\.,]/g, ''),
-                buyPrice: $(columns[1]).text().trim().replace(/[\.,]/g, ''),
+                sellPrice: $(columns[3]).text().trim().replace(/[\.,]/g, ''),
+                buyPrice: $(columns[2]).text().trim().replace(/[\.,]/g, ''),
                 updateTime: updatedTime
             });
         });
